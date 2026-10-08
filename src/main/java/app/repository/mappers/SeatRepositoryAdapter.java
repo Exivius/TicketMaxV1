@@ -23,21 +23,33 @@ public class SeatRepositoryAdapter implements SeatRepositoryPort {
 
     @Override
     public Seat selectById(int id) {
+        for (Seat seat : seats) {
+            if (seat.getSeatId() != null && seat.getSeatId() == id) {
+                return seat;
+            }
+        }
         return null;
     }
 
     @Override
     public List<Seat> selectAllSeats() {
-        return List.of();
+        return seats;
     }
 
     @Override
     public Seat updateSeat(Seat seat) {
+        for (int index = 0; index < seats.size(); index++) {
+            Seat currentSeat = seats.get(index);
+            if (currentSeat.getSeatId() != null && currentSeat.getSeatId().equals(seat.getSeatId())) {
+                seats.set(index, seat);
+                return seat;
+            }
+        }
         return null;
     }
 
     @Override
     public void deleteById(int id) {
-
+        seats.removeIf(seat -> seat.getSeatId() != null && seat.getSeatId() == id);
     }
 }

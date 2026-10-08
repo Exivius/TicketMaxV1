@@ -27,22 +27,23 @@ public class SeatServiceAdapter implements SeatServiceInterface {
 
     @Override
     public Seat selectSeatById(int id) {
-        return null;
+        return seatRepositoryPort.selectById(id);
     }
 
     @Override
     public List<Seat> selectAllSeats() {
-        return List.of();
+        return seatRepositoryPort.selectAllSeats();
     }
 
     @Override
     public Seat updateSeat(Integer seatId, String seatNumber, String seatSector, String isAvailable) {
-        return null;
+        Seat seat = new Seat(seatId, seatNumber, seatSector, isAvailable);
+        return seatRepositoryPort.updateSeat(seat);
     }
 
     @Override
     public void deleteSeat(int id) {
-
+        seatRepositoryPort.deleteById(id);
     }
     //14. Se implementan los metodos de la interfaz SeatRepositoryPort en la clase SeatRepositoryAdapter
 }

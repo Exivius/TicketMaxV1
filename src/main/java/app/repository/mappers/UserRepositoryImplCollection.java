@@ -31,6 +31,11 @@ public class UserRepositoryImplCollection implements UserRepository {
 
     @Override
     public User selectById(int id) {
+        for (User user : users) {
+            if (user.getId() != null && user.getId() == id) {
+                return user;
+            }
+        }
         return null;
     }
 
@@ -38,10 +43,10 @@ public class UserRepositoryImplCollection implements UserRepository {
     public List<User> selectAll() {
 
         for(User user : users){
-            System.out.println(user.getId() + "" +
-                    " " + user.getName() + "" + user.getLastName() + " " + user.getEmail() + " "
-                    + user.getPhone() + "" + user.getPassword() + "" + user.isState() +
-                    "" + user.getCity() + "" + user.getPreferences());
+            System.out.println(user.getId() + " " +
+                    " " + user.getName() + " " + user.getLastName() + " " + user.getEmail() + " "
+                    + user.getPhone() + " " + user.getPassword() + " " + user.isState() +
+                    " " + user.getCity() + " " + user.getPreferences());
         }
 
         return users;
@@ -49,16 +54,27 @@ public class UserRepositoryImplCollection implements UserRepository {
 
     @Override
     public User updateUser(User user) {
+        for (int index = 0; index < users.size(); index++) {
+            User currentUser = users.get(index);
+            if (currentUser.getId() != null && currentUser.getId().equals(user.getId())) {
+                users.set(index, user);
+                return user;
+            }
+        }
         return null;
     }
 
     @Override
     public void deleteById(int id) {
-
+        users.removeIf(user -> user.getId() != null && user.getId() == id);
     }
 
     @Override
     public User create(User user) {
-        return null;
+        return save(user);
+    }
+
+    public int countUsers() {
+        return users.size();
     }
 }

@@ -14,6 +14,7 @@
         //19. Continua en SeatServiceAdapter
 
         //2. Quitalos los metodos de la clase Seat y los movemos a View
+        //3 sigue en SeatServiceInterface
         public void createSeat(){
             //26. Se solicitan los datos del asiento al usuario y se validan los tipos de datos
             int id = DataTypeValidator.validateInt("Ingrese el id del asiento");
@@ -28,18 +29,35 @@
         }
 
         public void selectAllSeats(){
-
+            for (var seat : seatServiceInterface.selectAllSeats()) {
+                System.out.println(seat.getSeatId() + " " + seat.getSeatNumber() + " "
+                        + seat.getSeatSector() + " " + seat.isAvailable());
+            }
         }
 
         public void selectSeatById(int id){
-
+            var seat = seatServiceInterface.selectSeatById(id);
+            if (seat == null) {
+                System.out.println("No se encontró un asiento con ese id");
+                return;
+            }
+            System.out.println(seat.getSeatId() + " " + seat.getSeatNumber() + " "
+                    + seat.getSeatSector() + " " + seat.isAvailable());
         }
 
         public void updateSeat(){
-
+            int id = DataTypeValidator.validateInt("Ingrese el id del asiento a actualizar");
+            if (seatServiceInterface.selectSeatById(id) == null) {
+                System.out.println("No se encontró un asiento con ese id");
+                return;
+            }
+            String number = DataTypeValidator.validateString("Ingrese el numero del asiento");
+            String sector = DataTypeValidator.validateString("Ingrese el sector del asiento");
+            String state = SetSeatStateHelper.getSeatState();
+            seatServiceInterface.updateSeat(id, number, sector, state);
         }
 
         public void deleteSeat(int id){
-
+            seatServiceInterface.deleteSeat(id);
         }
 }

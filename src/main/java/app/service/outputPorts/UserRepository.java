@@ -11,4 +11,5 @@ public interface UserRepository {
     public User updateUser(User user);
     public void deleteById(int id);
     User create(User user);
+    public int countUsers();
 }

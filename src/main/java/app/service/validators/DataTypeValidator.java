@@ -17,7 +17,7 @@ public class DataTypeValidator {
                 return value;
             } catch (InputMismatchException e) {
                 sc.nextLine();
-                System.out.println("Solo se aceptan numeros enteros" + e.getMessage());
+                System.out.println("Solo se aceptan numeros enteros " + e.getMessage());
             }
         }
     }
@@ -32,7 +32,7 @@ public class DataTypeValidator {
                 return value;
             } catch (InputMismatchException e) {
                 sc.nextLine();
-                System.out.println("Solo se aceptan numeros decimales" + e.getMessage());
+                System.out.println("Solo se aceptan numeros decimales " + e.getMessage());
             }
         }
     }
@@ -47,7 +47,7 @@ public class DataTypeValidator {
                 return value;
             } catch (InputMismatchException e) {
                 sc.nextLine();
-                System.out.println("Solo se aceptan numeros decimal flotante" + e.getMessage());
+                System.out.println("Solo se aceptan numeros decimal flotante " + e.getMessage());
             }
         }
     }
